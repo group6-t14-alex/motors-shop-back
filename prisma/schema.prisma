@@ -9,3 +9,21 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Car {
+  id          Int     @id() @default(autoincrement())
+  name        String  @db.VarChar(50)
+  description String  @db.Text()
+  km          Int     @db.Integer()
+  year        Int     @db.Integer()
+  price       Float   @db.Real()
+  priceFipe   Float   @map("price_fipe") @db.Real()
+  imageUrl    String  @map("image_url")
+  model       String  @db.VarChar(100)
+  color       String  @db.VarChar(50)
+  brand       String  @db.VarChar(50)
+  fuel        String  @db.VarChar(50)
+  isActive    Boolean @default(true) @map("is_active") @db.Boolean()
+
+  @@map("cars")
+}
