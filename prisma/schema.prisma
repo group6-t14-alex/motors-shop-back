@@ -10,6 +10,25 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User{
+  id Int @id()@default(autoincrement())
+  name String @db.VarChar(100)@unique
+  email String @db.VarChar(150)@unique
+  cpf String @db.VarChar(25)@unique
+  phone String? @db.VarChar(25)
+  date_of_birth DateTime? @db.Date()
+  description String? @db.Text()
+  cep String @db.VarChar(8)
+  number String @db.VarChar(25)
+  complement String? @db.VarChar(50)
+  type_user String @db.VarChar(25)
+  password String @db.VarChar(50)
+
+  car Car[]
+
+  @@map("users")
+}
+
 model Car {
   id          Int     @id() @default(autoincrement())
   name        String  @db.VarChar(50)
@@ -25,5 +44,9 @@ model Car {
   fuel        String  @db.VarChar(50)
   isActive    Boolean @default(true) @map("is_active") @db.Boolean()
 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
+
   @@map("cars")
 }
+
