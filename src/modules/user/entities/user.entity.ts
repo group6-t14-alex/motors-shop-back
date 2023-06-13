@@ -6,7 +6,7 @@ export class User {
   email: string;
   cpf: string;
   phone: string;
-  date_of_birth: Date;
+  date_of_birth: string;
   description: string;
   cep: string;
   number: string;

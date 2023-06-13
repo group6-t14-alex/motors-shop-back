@@ -8,7 +8,11 @@ import { UpdateCarDto } from '../../dto/update-car.dto';
 
 @Injectable()
 export class CarsPrismaRepository implements CarsRepository {
-  constructor(private prisma: PrismaService) {}
+  private userId: number;
+  constructor(private prisma: PrismaService) {
+    //TODO:buscar id no token
+    this.userId = 1;
+  }
   async create(data: CreateCarDto): Promise<Car> {
     const car = new Car();
     Object.assign(car, {
@@ -16,7 +20,7 @@ export class CarsPrismaRepository implements CarsRepository {
     });
 
     const newCar = await this.prisma.car.create({
-      data: { ...car },
+      data: { ...car, userId: this.userId },
     });
 
     return plainToInstance(Car, newCar);
