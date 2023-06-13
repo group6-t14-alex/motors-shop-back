@@ -16,13 +16,13 @@ model User{
   email String @db.VarChar(150)@unique
   cpf String @db.VarChar(25)@unique
   phone String? @db.VarChar(25)
-  date_of_birth DateTime? @db.Date()
+  date_of_birth String? @db.VarChar()
   description String? @db.Text()
   cep String @db.VarChar(8)
   number String @db.VarChar(25)
   complement String? @db.VarChar(50)
   type_user String @db.VarChar(25)
-  password String @db.VarChar(50)
+  password String @db.VarChar(255)
 
   car Car[]
 
