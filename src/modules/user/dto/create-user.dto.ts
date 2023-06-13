@@ -1,12 +1,6 @@
 import { hashSync } from 'bcrypt';
 import { Transform } from 'class-transformer';
-import {
-  IsDate,
-  IsISO8601,
-  IsNotEmpty,
-  IsString,
-  MinLength,
-} from 'class-validator';
+import { IsNotEmpty, IsString, MinLength } from 'class-validator';
 import { UserType } from '../enum/typeUser.enum';
 
 export class CreateUserDto {
