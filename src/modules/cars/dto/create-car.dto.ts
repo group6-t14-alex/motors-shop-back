@@ -60,8 +60,4 @@ export class CreateCarDto {
   @ApiProperty()
   @IsBoolean()
   isActive?: boolean;
-
-  @IsNumber()
-  @IsNotEmpty()
-  userId: number;
 }

@@ -3,39 +3,41 @@ import { Injectable } from '@nestjs/common';
 import { CreateCarDto } from '../../dto/create-car.dto';
 import { Car } from '../../entities/car.entity';
 import { PrismaService } from '../../../../database/prisma.service';
-import { plainToInstance } from 'class-transformer';
 import { UpdateCarDto } from '../../dto/update-car.dto';
 
 @Injectable()
 export class CarsPrismaRepository implements CarsRepository {
-  private userId: number;
-  constructor(private prisma: PrismaService) {
-    //TODO:buscar id no token
-    this.userId = 1;
-  }
-  async create(data: CreateCarDto): Promise<Car> {
+  constructor(private prisma: PrismaService) {}
+
+  async create(data: CreateCarDto, idUser: string): Promise<Car> {
     const car = new Car();
     Object.assign(car, {
       ...data,
     });
 
     const newCar = await this.prisma.car.create({
-      data: { ...car, userId: this.userId },
+      data: { ...car, userId: +idUser },
     });
 
-    return plainToInstance(Car, newCar);
+    return newCar;
   }
 
   async findAll(): Promise<Car[]> {
-    const cars = await this.prisma.car.findMany();
-    return plainToInstance(Car, cars);
+    const cars = await this.prisma.car.findMany({ include: { user: true } });
+    cars.forEach((car) => {
+      delete car.user.password;
+    });
+    return cars;
   }
 
   async findOne(id: number): Promise<Car> {
     const car = await this.prisma.car.findUnique({
       where: { id },
+      include: { user: true },
     });
-    return plainToInstance(Car, car);
+
+    delete car.user.password;
+    return car;
   }
 
   async delete(id: number): Promise<void> {
@@ -48,7 +50,16 @@ export class CarsPrismaRepository implements CarsRepository {
     const car = await this.prisma.car.update({
       where: { id },
       data: { ...data },
+      include: { user: true },
     });
-    return plainToInstance(Car, car);
+    delete car.user.password;
+    return car;
+  }
+
+  async isOwner(id: number, idUser: number): Promise<boolean> {
+    const car = await this.prisma.car.findFirst({
+      where: { id: id, userId: idUser },
+    });
+    return !!car;
   }
 }

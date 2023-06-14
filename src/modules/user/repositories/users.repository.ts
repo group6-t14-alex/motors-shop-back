@@ -9,4 +9,6 @@ export abstract class UsersRepository {
   abstract findByEmail(email: string): Promise<User> | User;
   abstract update(id: number, data: UpdateUserDto): Promise<User> | User;
   abstract delete(id: number): Promise<void> | void;
+  abstract isAccountOwner(id: number, userId: number): Promise<boolean>;
+  abstract verifyTypeUser(userId: number): Promise<boolean>;
 }
