@@ -53,7 +53,7 @@ export class CreateUserDto {
 
   @ApiProperty()
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   complement: string;
 
   @ApiProperty()
