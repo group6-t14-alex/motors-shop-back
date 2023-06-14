@@ -8,6 +8,8 @@ import {
   Delete,
   UseInterceptors,
   ClassSerializerInterceptor,
+  UseGuards,
+  Request,
 } from '@nestjs/common';
 import { CarsService } from './cars.service';
 import { CreateCarDto } from './dto/create-car.dto';
@@ -19,6 +21,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { Car } from './entities/car.entity';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @ApiTags('Cars')
 @Controller('cars')
@@ -28,8 +31,9 @@ export class CarsController {
   @ApiCreatedResponse({ type: Car })
   @UseInterceptors(ClassSerializerInterceptor)
   @Post()
-  create(@Body() createCarDto: CreateCarDto) {
-    return this.carsService.create(createCarDto);
+  @UseGuards(JwtAuthGuard)
+  create(@Body() createCarDto: CreateCarDto, @Request() req: any) {
+    return this.carsService.create(createCarDto, req.user.id);
   }
 
   @ApiOkResponse({ type: Car, isArray: true })
@@ -49,14 +53,20 @@ export class CarsController {
   @ApiOkResponse({ type: Car })
   @UseInterceptors(ClassSerializerInterceptor)
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCarDto: UpdateCarDto) {
-    return this.carsService.update(+id, updateCarDto);
+  @UseGuards(JwtAuthGuard)
+  update(
+    @Param('id') id: string,
+    @Body() updateCarDto: UpdateCarDto,
+    @Request() req: any,
+  ) {
+    return this.carsService.update(+id, updateCarDto, req.user.id);
   }
 
   @ApiNoContentResponse({ description: 'No Content' })
   @UseInterceptors(ClassSerializerInterceptor)
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.carsService.remove(+id);
+  @UseGuards(JwtAuthGuard)
+  remove(@Param('id') id: string, @Request() req: any) {
+    return this.carsService.remove(+id, req.user.id);
   }
 }

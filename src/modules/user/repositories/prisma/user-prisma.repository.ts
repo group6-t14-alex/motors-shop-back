@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { UsersRepository } from '../users.repository';
 import { PrismaService } from 'src/database/prisma.service';
 import { CreateUserDto } from '../../dto/create-user.dto';
@@ -9,6 +13,7 @@ import { UpdateUserDto } from '../../dto/update-user.dto';
 @Injectable()
 export class UsersPrismaRepository implements UsersRepository {
   constructor(private prisma: PrismaService) {}
+
   async create(data: CreateUserDto): Promise<User> {
     const user = new User();
     Object.assign(user, {
@@ -23,7 +28,7 @@ export class UsersPrismaRepository implements UsersRepository {
     return plainToInstance(User, newUser);
   }
   async findAll(): Promise<User[]> {
-    const users = [await this.prisma.user.findMany({ include: { car: true } })];
+    const users = await this.prisma.user.findMany({ include: { car: true } });
     return plainToInstance(User, users);
   }
   async findOne(id: number): Promise<User> {
@@ -53,5 +58,23 @@ export class UsersPrismaRepository implements UsersRepository {
     await this.prisma.user.delete({
       where: { id },
     });
+  }
+
+  async isAccountOwner(id: number, userId: number): Promise<boolean> {
+    const user = await this.prisma.user.findFirst({ where: { id: id } });
+
+    if (user.id !== userId) {
+      throw new NotFoundException('You do not have permission');
+    }
+
+    return true;
+  }
+
+  async verifyTypeUser(userId: number): Promise<boolean> {
+    const user = await this.prisma.user.findFirst({ where: { id: userId } });
+    if (user.type_user !== 'anunciante') {
+      throw new UnauthorizedException('You can not create or update cars ads');
+    }
+    return true;
   }
 }

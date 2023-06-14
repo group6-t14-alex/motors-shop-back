@@ -39,12 +39,33 @@ export class UserService {
     return user;
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) {
+  async update(id: number, updateUserDto: UpdateUserDto, userId: string) {
+    const userFound = await this.usersRepository.findOne(id);
+    if (!userFound) {
+      throw new NotFoundException('User not found');
+    }
+
+    await this.usersRepository.isAccountOwner(id, +userId);
+
+    if (updateUserDto.email) {
+      const findUser = await this.usersRepository.findByEmail(
+        updateUserDto.email,
+      );
+
+      if (findUser && findUser.id !== id) {
+        throw new ConflictException('Email already exist');
+      }
+    }
     const user = await this.usersRepository.update(id, updateUserDto);
     return user;
   }
 
-  async remove(id: number) {
+  async remove(id: number, userId: string) {
+    const userFound = await this.usersRepository.findOne(id);
+    if (!userFound) {
+      throw new NotFoundException('User not found');
+    }
+    await this.usersRepository.isAccountOwner(id, +userId);
     await this.usersRepository.delete(id);
     return;
   }

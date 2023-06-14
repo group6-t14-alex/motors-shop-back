@@ -1,13 +1,23 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { CreateCarDto } from './dto/create-car.dto';
 import { UpdateCarDto } from './dto/update-car.dto';
 import { CarsRepository } from './repositories/cars.repository';
+import { UsersRepository } from '../user/repositories/users.repository';
 
 @Injectable()
 export class CarsService {
-  constructor(private carsRepository: CarsRepository) {}
-  async create(data: CreateCarDto) {
-    const car = await this.carsRepository.create(data);
+  constructor(
+    private carsRepository: CarsRepository,
+    private userRepository: UsersRepository,
+  ) {}
+
+  async create(data: CreateCarDto, userId: string) {
+    await this.userRepository.verifyTypeUser(+userId);
+    const car = await this.carsRepository.create(data, userId);
     return car;
   }
 
@@ -24,14 +34,24 @@ export class CarsService {
     return car;
   }
 
-  async update(id: number, data: UpdateCarDto) {
+  async update(id: number, data: UpdateCarDto, userId: string) {
     await this.findOne(id);
+    await this.userRepository.verifyTypeUser(+userId);
+    const isOwner = await this.carsRepository.isOwner(id, +userId);
+    if (!isOwner) {
+      throw new UnauthorizedException('You can not update this ad');
+    }
     const car = await this.carsRepository.update(id, data);
     return car;
   }
 
-  async remove(id: number) {
+  async remove(id: number, userId: string) {
     await this.findOne(id);
+    await this.userRepository.verifyTypeUser(+userId);
+    const isOwner = await this.carsRepository.isOwner(id, +userId);
+    if (!isOwner) {
+      throw new UnauthorizedException('You can not delete this ad');
+    }
     await this.carsRepository.delete(id);
   }
 }
