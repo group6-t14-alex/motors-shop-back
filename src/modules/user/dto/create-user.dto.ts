@@ -1,6 +1,6 @@
 import { hashSync } from 'bcrypt';
 import { Transform } from 'class-transformer';
-import { IsNotEmpty, IsString, MinLength } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, MinLength } from "class-validator";
 import { UserType } from '../enum/typeUser.enum';
 
 export class CreateUserDto {
@@ -17,12 +17,15 @@ export class CreateUserDto {
   cpf: string;
 
   @IsString()
+  @IsOptional()
   phone: string;
 
   @IsString()
+  @IsOptional()
   date_of_birth: string;
 
   @IsString()
+  @IsOptional()
   description: string;
 
   @IsString()
@@ -34,7 +37,7 @@ export class CreateUserDto {
   number: string;
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   complement: string;
 
   @IsString()
