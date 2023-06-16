@@ -32,9 +32,9 @@ model User {
 model Car {
   id          Int     @id() @default(autoincrement())
   description String  @db.Text()
-  km          Int     @db.Integer()
-  year        String  @db.VarChar()
-  price       Float   @db.Real()
+  km          String  @db.VarChar(20)
+  year        String  @db.VarChar(4)
+  price       String  @db.VarChar(20)
   priceFipe   Float   @map("price_fipe") @db.Real()
   imageUrl    String  @map("image_url")
   model       String  @db.VarChar(100)

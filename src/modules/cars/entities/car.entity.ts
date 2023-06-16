@@ -8,13 +8,13 @@ export class Car {
   description: string;
 
   @ApiProperty()
-  km: number;
+  km: string;
 
   @ApiProperty()
   year: string;
 
   @ApiProperty()
-  price: number;
+  price: string;
 
   @ApiProperty()
   priceFipe: number;
