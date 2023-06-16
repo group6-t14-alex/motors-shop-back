@@ -5,11 +5,6 @@ export class CreateCarDto {
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
-  name: string;
-
-  @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
   description: string;
 
   @ApiProperty()
@@ -18,9 +13,9 @@ export class CreateCarDto {
   km: number;
 
   @ApiProperty()
-  @IsNumber()
+  @IsString()
   @IsNotEmpty()
-  year: number;
+  year: string;
 
   @ApiProperty()
   @IsNumber()
