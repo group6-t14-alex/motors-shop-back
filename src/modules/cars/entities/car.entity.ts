@@ -5,19 +5,16 @@ export class Car {
   readonly id: number;
 
   @ApiProperty()
-  name: string;
-
-  @ApiProperty()
   description: string;
 
   @ApiProperty()
-  km: number;
+  km: string;
 
   @ApiProperty()
-  year: number;
+  year: string;
 
   @ApiProperty()
-  price: number;
+  price: string;
 
   @ApiProperty()
   priceFipe: number;
