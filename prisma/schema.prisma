@@ -23,8 +23,8 @@ model User {
   complement    String? @db.VarChar(50)
   type_user     String  @db.VarChar(25)
   password      String  @db.VarChar(255)
-
-  car Car[]
+  car           Car[]
+  reset_token   String?
 
   @@map("users")
 }
