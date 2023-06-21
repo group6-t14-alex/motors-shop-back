@@ -11,4 +11,7 @@ export abstract class UsersRepository {
   abstract delete(id: number): Promise<void> | void;
   abstract isAccountOwner(id: number, userId: number): Promise<boolean>;
   abstract verifyTypeUser(userId: number): Promise<boolean>;
+  abstract updateToken(email: string, resetToken: string): Promise<void> | void;
+  abstract updatePassword(id: number, password: string): Promise<void> | void;
+  abstract findByToken(token: string): Promise<User> | User;
 }

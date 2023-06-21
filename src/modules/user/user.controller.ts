@@ -10,6 +10,7 @@ import {
   Request,
   ClassSerializerInterceptor,
   UseInterceptors,
+  HttpCode,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -66,5 +67,21 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   remove(@Param('id') id: number, @Request() req: any) {
     return this.userService.remove(+id, req.user.id);
+  }
+
+  @HttpCode(200)
+  @Post('resetPassword')
+  async sendEmailResetPassword(@Body('email') email: string) {
+    await this.userService.sendEmailResetPassword(email);
+    return { message: 'Email has been sent' };
+  }
+
+  @Patch('resetPassword/:token')
+  async resetPassword(
+    @Param('token') token: string,
+    @Body('password') password: string,
+  ) {
+    await this.userService.resetPassword(password, token);
+    return { message: 'Password changed successfully.' };
   }
 }

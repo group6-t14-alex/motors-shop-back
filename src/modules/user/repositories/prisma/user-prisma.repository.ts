@@ -9,6 +9,7 @@ import { CreateUserDto } from '../../dto/create-user.dto';
 import { User } from '../../entities/user.entity';
 import { plainToInstance } from 'class-transformer';
 import { UpdateUserDto } from '../../dto/update-user.dto';
+import { hashSync } from 'bcrypt';
 
 @Injectable()
 export class UsersPrismaRepository implements UsersRepository {
@@ -46,6 +47,14 @@ export class UsersPrismaRepository implements UsersRepository {
     });
     return user;
   }
+
+  async findByToken(token: string): Promise<User> {
+    const user = await this.prisma.user.findFirst({
+      where: { reset_token: token },
+    });
+    return user;
+  }
+
   async update(id: number, data: UpdateUserDto): Promise<User> {
     const user = await this.prisma.user.update({
       where: { id },
@@ -76,5 +85,22 @@ export class UsersPrismaRepository implements UsersRepository {
       throw new UnauthorizedException('You can not create or update cars ads');
     }
     return true;
+  }
+
+  async updateToken(email: string, resetToken: string): Promise<void> {
+    await this.prisma.user.update({
+      where: { email },
+      data: { reset_token: resetToken },
+    });
+  }
+
+  async updatePassword(id: number, password: string): Promise<void> {
+    await this.prisma.user.update({
+      where: { id },
+      data: {
+        password: hashSync(password, 10),
+        reset_token: null,
+      },
+    });
   }
 }
