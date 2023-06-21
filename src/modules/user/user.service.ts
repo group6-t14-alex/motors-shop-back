@@ -96,7 +96,7 @@ export class UserService {
 
   async resetPassword(password: string, reset_token: string) {
     const user = await this.usersRepository.findByToken(reset_token);
-    console.log(user);
+
     if (!user) {
       throw new NotFoundException('User not found !');
     }

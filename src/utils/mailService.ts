@@ -6,8 +6,9 @@ import * as Mailgen from 'mailgen';
 const mailGenerator = new Mailgen({
   theme: 'default',
   product: {
-    name: 'Logo Motors Shop linha 10 mail service',
+    name: 'Mototors Shop',
     link: 'https://localhost:3001',
+    logo: 'https://live.staticflickr.com/65535/52991067244_2c033406c3_t.jpg',
   },
 });
 
@@ -38,18 +39,17 @@ export class MailService {
   ) {
     const email = {
       body: {
-        name: userName,
+        name: `${userName}`,
         intro:
           'Você recebeu este e-mail porque uma solicitação de redefinição de senha para sua conta foi recebida.',
         action: {
           instructions: 'Clique no botão abaixo para redefinir sua senha:',
           button: {
             color: '#4529E6',
-            text: 'Redefinição de senha.',
-            link: `https://localhost:3001/user/resetPassword/${resetToken}}`,
+            text: 'Redefinir senha.',
+            link: `https://localhost:3001/user/resetPassword/${resetToken}`,
           },
-          outro:
-            'Se você não solicitou uma redefinição de senha, ignore este email.',
+          outro: 'Se você não fez esta solicitação, ignore este e-mail.',
         },
       },
     };
