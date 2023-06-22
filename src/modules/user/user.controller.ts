@@ -46,7 +46,7 @@ export class UserController {
   @ApiOkResponse({ type: User })
   @Get(':id')
   // @UseGuards(JwtAuthGuard)
-  findOne(@Param('id') id: number) {
+  findOne(@Param('id') id: string) {
     return this.userService.findOne(id);
   }
 
