@@ -18,7 +18,7 @@ import { MailService } from 'src/utils/mailService';
         },
       },
       defaults: {
-        from: 'feernanda.bollinger@gmail.com',
+        from: 'samir3500@gmail.com',
       },
     }),
   ],
