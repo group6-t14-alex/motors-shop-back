@@ -47,7 +47,7 @@ export class MailService {
           button: {
             color: '#4529E6',
             text: 'Redefinir senha.',
-            link: `https://localhost:3001/user/resetPassword/${resetToken}`,
+            link: `http://localhost:3000/resetPassword/${resetToken}`,
           },
           outro: 'Se você não fez esta solicitação, ignore este e-mail.',
         },
