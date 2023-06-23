@@ -30,6 +30,15 @@ export class User {
   number: string;
 
   @ApiProperty()
+  city: string;
+
+  @ApiProperty()
+  state: string;
+
+  @ApiProperty()
+  address: string;
+
+  @ApiProperty()
   complement: string;
 
   @ApiProperty()
