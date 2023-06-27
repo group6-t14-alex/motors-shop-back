@@ -27,6 +27,7 @@ model User {
   type_user     String  @db.VarChar(25)
   password      String  @db.VarChar(255)
   car           Car[]
+  comments      Comments[]
   reset_token   String?
 
   @@map("users")
@@ -45,9 +46,24 @@ model Car {
   brand       String  @db.VarChar(50)
   fuel        String  @db.VarChar(50)
   isActive    Boolean @default(true) @map("is_active") @db.Boolean()
+  comments    Comments[]
 
   user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
 
   @@map("cars")
+}
+
+model Comments {
+  id          Int     @id @default(autoincrement())
+  comment     String  @db.Text()
+  created_at  DateTime  @default(now())
+
+  car Car @relation(fields: [carId], references: [id], onDelete: Cascade)
+  carId Int
+
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
+
+  @@map("comments")
 }

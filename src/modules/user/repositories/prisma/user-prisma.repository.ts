@@ -23,7 +23,7 @@ export class UsersPrismaRepository implements UsersRepository {
 
     const newUser = await this.prisma.user.create({
       data: { ...user },
-      include: { car: true },
+      include: { car: true, comments: true },
     });
 
     return plainToInstance(User, newUser);
@@ -38,6 +38,7 @@ export class UsersPrismaRepository implements UsersRepository {
       where: { id },
       include: {
         car: true,
+        comments: true,
       },
     });
 

@@ -18,6 +18,6 @@ import { UserModule } from '../user/user.module';
     },
   ],
 
-  exports: [CarsService],
+  exports: [CarsService, CarsRepository],
 })
 export class CarsModule {}
