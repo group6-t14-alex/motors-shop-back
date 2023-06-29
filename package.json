@@ -42,9 +42,7 @@
     "passport-local": "^1.0.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
-    "swagger-ui-express": "^4.6.3"
-  },
-  "devDependencies": {
+    "swagger-ui-express": "^4.6.3",
     "@nestjs/cli": "^9.0.0",
     "@nestjs/schematics": "^9.0.0",
     "@nestjs/testing": "^9.0.0",
@@ -69,6 +67,11 @@
     "ts-node": "^10.0.0",
     "tsconfig-paths": "4.2.0",
     "typescript": "^5.0.0"
+  },
+  "devDependencies": {
+  },
+  "engines": {
+    "node": ">=16 <17"
   },
   "jest": {
     "moduleFileExtensions": [
