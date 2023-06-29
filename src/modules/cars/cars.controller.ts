@@ -59,7 +59,7 @@ export class CarsController {
     @Body() updateCarDto: UpdateCarDto,
     @Request() req: any,
   ) {
-    return this.carsService.update(+id, updateCarDto, req.user.id);
+    return this.carsService.update(parseInt(id), updateCarDto, req.user.id);
   }
 
   @ApiNoContentResponse({ description: 'No Content' })

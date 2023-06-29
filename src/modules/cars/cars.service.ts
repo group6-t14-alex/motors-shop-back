@@ -35,13 +35,13 @@ export class CarsService {
   }
 
   async update(id: number, data: UpdateCarDto, userId: string) {
-    await this.findOne(id);
+    await this.findOne(+id);
     await this.userRepository.verifyTypeUser(+userId);
-    const isOwner = await this.carsRepository.isOwner(id, +userId);
+    const isOwner = await this.carsRepository.isOwner(+id, +userId);
     if (!isOwner) {
       throw new UnauthorizedException('You can not update this ad');
     }
-    const car = await this.carsRepository.update(id, data);
+    const car = await this.carsRepository.update(+id, data);
     return car;
   }
 
