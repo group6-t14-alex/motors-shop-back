@@ -1,73 +1,62 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<h1>💻 <strong>MOTORSHOP</strong></h1>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
+## Descrição do projeto
+A API de Motors Show é um serviço de anúncios de carros em um site, desenvolvida usando NestJS, Prisma e Swagger. A documentação Swagger detalha os endpoints para listar, criar, atualizar e excluir carros anunciados. Ela fornece exemplos, parâmetros e respostas esperadas. A autenticação e autorização também são abordadas. A documentação é uma referência completa para integrar a API de Motors Show em aplicações.
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+<h2>🎲 Utilizando o projeto</h2>
+<hr/>
+<h3><strong>▪️ Baixando projeto e instalando dependências</strong></h3>
+<p>Faça o fork do repositório, e clone o projeto no seu computador</p>
+<p>Utilize o gerenciador de pacotes de sua preferência, usando um dos comandos abaixo</p>
 
 ```bash
 $ npm install
+ou
+$ yarn install
+ou
+$ pnpm install
 ```
 
-## Running the app
+<h3><strong>▪️ Rodando o projeto</strong></h3>
+<p>Após instalar todas as dependências, rode o comando padrão de <strong>watch mode</strong> abaixo para iniciar o projeto na porta 3001, mas pode ser configurado na porta que preferir.</p>
+<p>Url base local: http://localhost:3000</p>
 
 ```bash
-# development
-$ npm run start
-
 # watch mode
 $ npm run start:dev
+
+# development
+$ npm run start
 
 # production mode
 $ npm run start:prod
 ```
+<hr/>
 
-## Test
+<h2>📚 Bibliotecas utilizadas</h2>
 
-```bash
-# unit tests
-$ npm run test
+- Bcrypt
+- Class Transform
+- Node Crypto
+- Node Mailer
+- Passport
+- Prisma
+- Swagger
+<hr/>
 
-# e2e tests
-$ npm run test:e2e
+<h2>⚛️ Equipe de Desenvolvimento</h2>
 
-# test coverage
-$ npm run test:cov
-```
+- Douglas Diniz - [Github](https://github.com/douglasdinizkenzie) | [Linkedin](https://www.linkedin.com/in/douglas-diniz-//)
+- Edson Kokado - [Github](https://github.com/eskokado) | [Linkedin](https://www.linkedin.com/in/edson-shideki-kokado/)
+- Fernanda Bollinger - [Github](https://github.com/febollinger) | [Linkedin](https://www.linkedin.com/in/fernandabollinger/)
+- Lilian Dias - [Github](https://github.com/lilianfdias) | [Linkedin](https://www.linkedin.com/in/lilian-fernandes-oliveira-dias-4a159578/)
+- Samir Dourado - [Github](https://github.com/samirdourado) | [Linkedin](https://www.linkedin.com/in/samirdourado/)
 
-## Support
+<p>Supervisionado por</p>
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- Alex Silva - [Github](https://github.com/alexandersilvadev) | [Linkedin](https://www.linkedin.com/in/alesilva-dev/)
 
-## Stay in touch
+<hr/>
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
