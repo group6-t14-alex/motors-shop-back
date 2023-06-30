@@ -15,6 +15,11 @@ import { hashSync } from 'bcrypt';
 export class UsersPrismaRepository implements UsersRepository {
   constructor(private prisma: PrismaService) {}
 
+  async findUserByCPF(cpf: string): Promise<User> {
+    const user = await this.prisma.user.findFirst({ where: { cpf } });
+    return user;
+  }
+
   async create(data: CreateUserDto): Promise<User> {
     const user = new User();
     Object.assign(user, {
