@@ -22,6 +22,13 @@ export class UserService {
     if (findUser) {
       throw new ConflictException('User already exists');
     }
+
+    const findUserByCpf = await this.usersRepository.findUserByCPF(
+      createUserDto.cpf,
+    );
+    if (findUserByCpf) {
+      throw new ConflictException('A user with this CPF already exists');
+    }
     const user = await this.usersRepository.create(createUserDto);
     return user;
   }
@@ -59,6 +66,15 @@ export class UserService {
 
       if (findUser && findUser.id !== id) {
         throw new ConflictException('Email already exist');
+      }
+    }
+
+    if (updateUserDto.cpf) {
+      const findUserByCPF = await this.usersRepository.findUserByCPF(
+        updateUserDto.cpf,
+      );
+      if (findUserByCPF && findUserByCPF.id !== id) {
+        throw new ConflictException('A user with this CPF already exists');
       }
     }
     const user = await this.usersRepository.update(id, updateUserDto);
