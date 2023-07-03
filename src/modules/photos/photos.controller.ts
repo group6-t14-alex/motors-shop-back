@@ -29,8 +29,7 @@ export class PhotosController {
   constructor(private readonly photosService: PhotosService) {}
 
   @ApiCreatedResponse({ type: Photo })
-  // @UseInterceptors(ClassSerializerInterceptor)
-  @Post()
+  @UseInterceptors(ClassSerializerInterceptor)
   @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() CreatePhotoDto: CreatePhotoDto, @Request() req: any) {
