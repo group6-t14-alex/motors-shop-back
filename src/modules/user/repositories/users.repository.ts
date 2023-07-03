@@ -14,4 +14,5 @@ export abstract class UsersRepository {
   abstract updateToken(email: string, resetToken: string): Promise<void> | void;
   abstract updatePassword(id: number, password: string): Promise<void> | void;
   abstract findByToken(token: string): Promise<User> | User;
+  abstract findUserByCPF(cpf: string): Promise<User> | User;
 }

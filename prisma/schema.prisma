@@ -12,7 +12,7 @@ datasource db {
 
 model User {
   id            Int     @id @default(autoincrement())
-  name          String  @unique @db.VarChar(100)
+  name          String  @db.VarChar(100)
   email         String  @unique @db.VarChar(150)
   cpf           String  @unique @db.VarChar(25)
   phone         String? @db.VarChar(25)
@@ -28,6 +28,7 @@ model User {
   password      String  @db.VarChar(255)
   car           Car[]
   photo Photo[]
+  comments      Comments[]
   reset_token   String?
 
   @@map("users")
@@ -46,6 +47,7 @@ model Car {
   brand       String  @db.VarChar(50)
   fuel        String  @db.VarChar(50)
   isActive    Boolean @default(true) @map("is_active") @db.Boolean()
+  comments    Comments[]
 
   user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
@@ -60,4 +62,18 @@ model Photo{
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
 @@map("photos")
+}
+
+model Comments {
+  id          Int     @id @default(autoincrement())
+  comment     String  @db.Text()
+  created_at  DateTime  @default(now())
+
+  car Car @relation(fields: [carId], references: [id], onDelete: Cascade)
+  carId Int
+
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
+
+  @@map("comments")
 }
