@@ -27,6 +27,7 @@ model User {
   type_user     String  @db.VarChar(25)
   password      String  @db.VarChar(255)
   car           Car[]
+  photo Photo[]
   comments      Comments[]
   reset_token   String?
 
@@ -52,6 +53,15 @@ model Car {
   userId Int
 
   @@map("cars")
+}
+
+model Photo{
+  id Int @id @default(autoincrement())
+  src String @db.VarChar(200)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
+@@map("photos")
 }
 
 model Comments {
