@@ -7,17 +7,24 @@ import { CreateCarDto } from './dto/create-car.dto';
 import { UpdateCarDto } from './dto/update-car.dto';
 import { CarsRepository } from './repositories/cars.repository';
 import { UsersRepository } from '../user/repositories/users.repository';
+import { PhotosRepository } from '../photos/repositories/photos.repository';
 
 @Injectable()
 export class CarsService {
   constructor(
     private carsRepository: CarsRepository,
     private userRepository: UsersRepository,
+    private photosRepository: PhotosRepository,
   ) {}
 
   async create(data: CreateCarDto, userId: string) {
     await this.userRepository.verifyTypeUser(+userId);
+    const galleryArr = data.gallery;
     const car = await this.carsRepository.create(data, userId);
+    const carId = car.id;
+    galleryArr.map(async (item: any) => {
+      await this.photosRepository.create(item.url, carId.toString());
+    });
     return car;
   }
 

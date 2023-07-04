@@ -1,4 +1,4 @@
-import { IsBoolean, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsArray, IsBoolean, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateCarDto {
@@ -55,4 +55,8 @@ export class CreateCarDto {
   @ApiProperty()
   @IsBoolean()
   isActive?: boolean;
+
+  @ApiProperty()
+  @IsArray()
+  gallery: object[];
 }

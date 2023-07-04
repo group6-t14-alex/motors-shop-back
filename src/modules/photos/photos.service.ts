@@ -10,9 +10,9 @@ export class PhotosService {
     private photoRepository: PhotosRepository,
     private userRepository: UsersRepository,
   ) {}
-  async create(data: CreatePhotoDto, userId: string) {
-    await this.userRepository.verifyTypeUser(+userId);
-    const photo = await this.photoRepository.create(data, userId);
+  async create(data: CreatePhotoDto, carId: string) {
+    // await this.userRepository.verifyTypeUser(+userId);
+    const photo = await this.photoRepository.create(data, carId);
     return photo;
   }
 

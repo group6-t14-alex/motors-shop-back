@@ -17,5 +17,6 @@ import { PhotosPrismaRepository } from './repositories/prisma/photos-prisma.repo
       useClass: PhotosPrismaRepository,
     },
   ],
+  exports: [PhotosService],
 })
 export class PhotosModule {}
