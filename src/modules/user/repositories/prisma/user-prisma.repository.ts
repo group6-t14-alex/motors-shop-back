@@ -46,7 +46,8 @@ export class UsersPrismaRepository implements UsersRepository {
         comments: true,
       },
     });
-
+    // console.log(user);
+    //Esta requisição esta disparando a todo momento.
     if (!user) {
       console.log('User not found');
     }

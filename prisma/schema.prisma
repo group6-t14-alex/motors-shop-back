@@ -26,8 +26,7 @@ model User {
   complement    String? @db.VarChar(50)
   type_user     String  @db.VarChar(25)
   password      String  @db.VarChar(255)
-  car           Car[]
-  photo Photo[]
+  car           Car[]  
   comments      Comments[]
   reset_token   String?
 
@@ -48,9 +47,12 @@ model Car {
   fuel        String  @db.VarChar(50)
   isActive    Boolean @default(true) @map("is_active") @db.Boolean()
   comments    Comments[]
+  photo       Photo[]
 
   user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  // photo  Photo @relation(fields: [photoId], references: [id], onDelete: Cascade)
   userId Int
+  // photoId Int
 
   @@map("cars")
 }
@@ -59,8 +61,10 @@ model Photo{
   id Int @id @default(autoincrement())
   src String @db.VarChar(200)
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId Int
+  // user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  car Car @relation(fields: [carId], references: [id], onDelete: Cascade)
+  carId Int
+
 @@map("photos")
 }
 

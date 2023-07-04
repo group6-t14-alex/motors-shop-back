@@ -9,14 +9,14 @@ import { UpdatePhotoDto } from '../../dto/update-photo.dto';
 export class PhotosPrismaRepository implements PhotosRepository {
   constructor(private prisma: PrismaService) {}
 
-  async create(data: CreatePhotoDto, idUser: string): Promise<Photo> {
+  async create(data: CreatePhotoDto, idCar: string): Promise<Photo> {
     const photo = new Photo();
     Object.assign(photo, {
       ...data,
     });
 
     const newPhoto = await this.prisma.photo.create({
-      data: { ...photo, userId: +idUser },
+      data: { ...photo, carId: +idCar },
     });
 
     return newPhoto;
@@ -24,21 +24,21 @@ export class PhotosPrismaRepository implements PhotosRepository {
 
   async findAll(): Promise<Photo[]> {
     const photos = await this.prisma.photo.findMany({
-      include: { user: true },
+      include: { car: true },
     });
-    photos.forEach((photo) => {
-      delete photo.user.password;
-    });
+    // photos.forEach((photo) => {
+    //   delete photo.user.password;
+    // });
     return photos;
   }
 
   async findOne(id: number): Promise<Photo> {
     const photo = await this.prisma.photo.findUnique({
       where: { id },
-      include: { user: true },
+      // include: { user: true },
     });
 
-    delete photo.user.password;
+    // delete photo.user.password;
     return photo;
   }
 
@@ -52,9 +52,9 @@ export class PhotosPrismaRepository implements PhotosRepository {
     const photo = await this.prisma.photo.update({
       where: { id },
       data: { ...data },
-      include: { user: true },
+      // include: { user: true },
     });
-    delete photo.user.password;
+    // delete photo.user.password;
     return photo;
   }
 }

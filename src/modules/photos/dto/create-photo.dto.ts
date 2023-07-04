@@ -6,4 +6,5 @@ export class CreatePhotoDto {
   @IsString()
   @IsNotEmpty()
   src: string;
+  carId: number;
 }
