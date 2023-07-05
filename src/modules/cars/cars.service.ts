@@ -19,7 +19,7 @@ export class CarsService {
 
   async create(data: CreateCarDto, userId: string) {
     await this.userRepository.verifyTypeUser(+userId);
-    const galleryArr = data.gallery;
+    const galleryArr = data.photo;
     const car = await this.carsRepository.create(data, userId);
     const carId = car.id;
     galleryArr.map(async (item: any) => {
@@ -44,7 +44,14 @@ export class CarsService {
   async update(id: number, data: UpdateCarDto, userId: string) {
     await this.findOne(id);
     await this.userRepository.verifyTypeUser(+userId);
+
+    const galleryArr = data.photo;
+
     const isOwner = await this.carsRepository.isOwner(id, +userId);
+
+    galleryArr.map(async (item: any) => {
+      await this.photosRepository.create(item.url, id.toString());
+    });
     if (!isOwner) {
       throw new UnauthorizedException('You can not update this ad');
     }
