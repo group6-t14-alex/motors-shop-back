@@ -18,6 +18,7 @@ export class CarsService {
   ) {}
 
   async create(data: CreateCarDto, userId: string) {
+    console.log(data);
     await this.userRepository.verifyTypeUser(+userId);
     const galleryArr = data.gallery;
     const car = await this.carsRepository.create(data, userId);

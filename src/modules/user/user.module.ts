@@ -6,6 +6,8 @@ import { UsersRepository } from './repositories/users.repository';
 import { UsersPrismaRepository } from './repositories/prisma/user-prisma.repository';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { MailService } from 'src/utils/mailService';
+import { PhotosModule } from '../photos/photos.module';
+import { CarsModule } from '../cars/cars.module';
 
 @Module({
   imports: [

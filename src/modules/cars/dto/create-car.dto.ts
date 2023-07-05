@@ -1,4 +1,10 @@
-import { IsArray, IsBoolean, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsBoolean,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateCarDto {
