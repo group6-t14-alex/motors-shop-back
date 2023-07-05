@@ -17,7 +17,6 @@ import { UserModule } from '../user/user.module';
       useClass: CarsPrismaRepository,
     },
   ],
-
   exports: [CarsService, CarsRepository],
 })
 export class CarsModule {}
